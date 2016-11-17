@@ -1,0 +1,16 @@
+{
+  "name": "nodelight",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./dist/app.js"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "6.9.1"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.10"
+  }
+}

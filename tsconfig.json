@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "outDir": "./dist",
+    "pretty": true,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "target": "es5"
+  },
+  "files": [
+    "src/app.ts"
+  ]
+}
