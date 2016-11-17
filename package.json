@@ -5,12 +5,12 @@
   "scripts": {
     "start": "node ./dist/app.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "engines": {
     "node": "6.9.1"
   },
   "devDependencies": {
+    "@types/node": "^6.0.48",
     "typescript": "^2.0.10"
   }
 }
