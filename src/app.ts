@@ -1,12 +1,12 @@
 import * as http from 'http';
+import * as express from 'express';
 
-function hello(request: http.IncomingMessage, response: http.ServerResponse) {
-  response.end('Hello World');
-}
+const app: express.Application = express();
 
-const server = http.createServer(hello);
+app.get('/', function (req: express.Request, res: express.Response): void {
+  res.send('Hello World!');
+})
 
-const port = 3000
-server.listen(port, function() {
-  console.log("%s TypeScript listening on %s", process.pid, port);
+app.listen(3000, function (): void {
+  console.log('Example app listening on port 3000!')
 });
