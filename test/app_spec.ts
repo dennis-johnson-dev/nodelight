@@ -20,4 +20,23 @@ describe('Test Express', function() {
         done();
       });
   });
+
+  it('POST to /', function(done) {
+    chai.request(server)
+      .post('/')
+      .field('color', '#ffffff')
+      .end(function(err, res) {
+        expect(res).status(200);
+        done();
+      });
+  });
+
+  it('404s on other requests', function(done) {
+    chai.request(server)
+      .get('/bogus')
+      .end(function(err, res) {
+        expect(res).status(404);
+        done();
+      });
+  });
 });
