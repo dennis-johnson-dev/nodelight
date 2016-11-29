@@ -1,5 +1,5 @@
-import Color from '../src/color';
 import { expect } from 'chai';
+import Color from '../src/color';
 import * as fs from 'fs';
 
 describe('Test Color Class', function() {
