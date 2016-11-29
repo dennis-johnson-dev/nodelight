@@ -8,7 +8,8 @@ const app: express.Application = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
-var lightColor = new Color('#FF0000');
+var colorFile = '/tmp/production';
+var lightColor = new Color('#FF0000', colorFile);
 
 app.get('/', function (req: express.Request, res: express.Response): void {
   const body = `

@@ -1,7 +1,11 @@
+import * as fs from 'fs';
+
 class Color {
   color: string;
-  constructor(initialColor: string) {
+  statusFile: string;
+  constructor(initialColor: string, colorFile: string) {
     this.color = initialColor;
+    this.statusFile = colorFile;
   }
 
   getColor() {
@@ -9,7 +13,16 @@ class Color {
   }
 
   setColor(newColor: string) {
-    this.color = newColor
+    this.color = newColor;
+    this.writeColor();
+  }
+
+  writeColor() {
+    fs.writeFile(this.statusFile, this.color, function(error) {
+      if (error) {
+        return console.log(error);
+      }
+    });
   }
 }
 
