@@ -12,6 +12,6 @@
     "target": "es6"
   },
   "files": [
-    "src/app.ts"
+    "src/index.ts"
   ]
 }

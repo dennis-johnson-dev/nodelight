@@ -1,12 +1,15 @@
-import { expect } from 'chai';
+import * as chai from 'chai';
 import Color from '../src/color';
 import * as fs from 'fs';
 
-describe('Test Color Class', function() {
-  var statusFile = '/tmp/colorTest';
-  var defaultColor = new Color('#FF0000', statusFile);
+const expect = chai.expect;
 
-  after(function() {
+const statusFile = '/tmp/colorTest';
+
+describe('Test Color Class', function() {
+  const defaultColor = new Color('#FF0000', statusFile);
+
+  after(() => {
     fs.unlinkSync(statusFile);
   });
 
@@ -21,17 +24,21 @@ describe('Test Color Class', function() {
 });
 
 describe('Writes color to file', function() {
-  it('default color is written to file', function() {
-    var green = '#00FF00'
-    var statusFile = '/tmp/colorTest';
-    var fileColor = new Color(green, statusFile);
+  afterEach(() => {
+    fs.unlinkSync(statusFile);
+  });
+
+  it('default color is written to file', function(done) {
+    const green = '#00FF00'
+    const fileColor = new Color(green, statusFile);
     fileColor.setColor(green);
 
     console.log('Start test:', green);
-    var data = fs.readFile(statusFile, 'utf8', (error, data) => {
+    const data = fs.readFile(statusFile, 'utf8', (error, data) => {
       if (error) throw error;
       console.log('File Data:', data);
       expect(data).to.be.equal('#00FF11');
+      done();
     });
   });
 

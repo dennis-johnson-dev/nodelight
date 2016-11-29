@@ -3,40 +3,39 @@ import Color from './color';
 import * as express from 'express';
 import * as morgan from 'morgan';
 
-const app: express.Application = express();
+export const buildApp = (env: string) => {
+  const app: express.Application = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('combined'));
+  app.use(bodyParser.urlencoded({ extended: true }));
 
-var colorFile = '/tmp/production';
-var lightColor = new Color('#FF0000', colorFile);
+  if (env !== 'test') {
+    app.use(morgan('combined'));
+  }
 
-app.get('/', function (req: express.Request, res: express.Response): void {
-  const body = `
+  const colorFile = '/tmp/production';
+  const lightColor = new Color('#FF0000', colorFile);
+
+  app.get('/', function (req: express.Request, res: express.Response): void {
+    const body = `
     <form action="/api/color" method="post">
-      <input type="color" name="color" onchange="submit()" value="${lightColor.getColor()}" style="width:100%">
+    <input type="color" name="color" onchange="submit()" value="${lightColor.getColor()}" style="width:100%">
     </form>
-   `
-  res.send(body);
-})
-
-app.get('/api/color', function ( req: express.Request, res: express.Response): void {
-  res.json({
-    color: lightColor.getColor()
+    `
+    res.send(body);
   });
-})
 
-app.post('/api/color', function (req: express.Request, res: express.Response): void {
-  lightColor.setColor(req.body.color);
-  console.log(req.body);
-  res.json({
-    color: lightColor.getColor()
+  app.get('/api/color', function ( req: express.Request, res: express.Response): void {
+    res.json({
+      color: lightColor.getColor()
+    });
   });
-})
 
-const port = 3000;
-const server = app.listen(port, function (): void {
-  console.log('express started on port %s', port)
-});
+  app.post('/api/color', function (req: express.Request, res: express.Response): void {
+    lightColor.setColor(req.body.color);
+    res.json({
+      color: lightColor.getColor()
+    });
+  });
 
-module.exports = server;
+  return app;
+};

@@ -18,11 +18,7 @@ class Color {
   }
 
   writeColor() {
-    fs.writeFile(this.statusFile, this.color, function(error) {
-      if (error) {
-        return console.log(error);
-      }
-    });
+    fs.writeFileSync(this.statusFile, this.color);
   }
 }
 
